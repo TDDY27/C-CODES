@@ -21,7 +21,6 @@ signed main(){
                 rec+=30;
         }
         rec+=d-1;
-        printf("%d\n", rec);
 
         int chk=0;
         if(m>12 || m<1) printf("-1\n");
