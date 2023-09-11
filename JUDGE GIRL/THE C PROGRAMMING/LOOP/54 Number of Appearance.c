@@ -1,21 +1,18 @@
 #include <stdio.h>
 
-int a,b;
-int A,B;
-
 signed main(){
-    scanf("%d%d", &a,&b);
+    int n,m;
+    scanf("%d%d", &n, &m);
 
-    int tmpa=a,tmpb=b;
-    for(int i=0;i<4; i++, tmpa/=10, tmpb/=10) if(tmpa%10==tmpb%10) A++;
-
-    tmpa=a;
-    for(int i=0;i<4; i++, tmpa/=10){
-        tmpb=b;
-        for(int j=0;j<4; j++, tmpb/=10){
-            if(i==j) continue;
-            if(tmpa%10==tmpb%10) B++;
+    int tmpn,tmpm;
+    int ans=0;
+    for(int i=0;i<7;i++, m/=10){
+        tmpn=n;
+        tmpm=m;
+        for(int j=0;j<2;j++, tmpn/=10, tmpm/=10){
+            if(tmpn%10==tmpm%10 && j==1) ans++;
+            else if(tmpn%10!=tmpm%10) break;
         }
     }
-    printf("%dA%dB", A,B);
+    printf("%d\n", ans);
 }
