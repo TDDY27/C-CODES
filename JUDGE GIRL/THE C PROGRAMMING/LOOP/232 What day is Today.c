@@ -37,7 +37,7 @@ signed main(){
         }
 
         if(chk==1) printf("-2\n");
-        else printf("%d\n", (rec+da)%7 );
+        else printf("%d\n", (rec%7+da)%7 );
 
         n--;
     }
