@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <string.h>
-#define int long long 
+#define maxn 100000
+//#define int long long 
 
-int fx(int x,int a,int b,int c){
+long long fx(long long  x,long long a,long long b,long long c){
     return x*x*x+a*x*x+b*x+c;
+}
+
+long long ffx(long long  x,long long a,long long b,long long c){
+    return 3*x*x+2*a*x+b;
+}
+
+long long fffx(long long  x,long long a,long long b,long long c){
+    return 6*x+2*a;
 }
 
 signed main(){
@@ -11,19 +20,24 @@ signed main(){
     scanf("%d%d%d", &a,&b,&c);
 
     int rec=1;
-    int fac[100000];
-    memset(fac,0,sizeof fac);
-    for(int i=c;i>=1;i--) if(c%i==0) fac[rec]=-i, rec++;
-    for(int i=1;i<=c;i++) if(c%i==0) fac[rec]=i, rec++;
+    int tmp=c;
+    if(c==0) tmp=b;
+    if(c==0 && b==0) tmp=a;
+    if(tmp<0) tmp*=-1;
 
-    int flag=1;
-    for(int i=1;i<=rec;i++){
-        if(fx(-fac[i],a,b,c)==0 && flag<3){
-            printf("%d ", fac[i]);
+
+    int flag=0;
+    for(int i=-tmp;i<=tmp;i++){
+        if(fffx(-i,a,b,c)==0 && ffx(-i,a,b,c)==0 && fx(-i,a,b,c)==0 ){
+            printf("%d %d %d", i,i,i);
+        }else if(ffx(-i,a,b,c)==0 && fx(-i,a,b,c)==0 ){
+            printf("%d %d", i,i);
+            flag+=2;
+            if(flag<3) printf(" ");
+        }else if(fx(-i,a,b,c)==0 ){
+            printf("%d", i);
             flag++;
-        }else if(fx(-fac[i],a,b,c)==0 && flag==3){
-            printf("%d", fac[i]);
-            break;
+            if(flag<3) printf(" ");
         }
     }
 }
