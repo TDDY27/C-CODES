@@ -4,7 +4,7 @@
 int G[260][260][15];
 char ppl[15][70];
 
-int main(){
+signed main(){
     int n,m;
     scanf("%d%d", &n,&m);
     for(int i=1;i<=n;i++){
@@ -40,4 +40,5 @@ int main(){
         }
         if(end==1) break;
     }
+    return 0;
 }
