@@ -15,7 +15,7 @@ signed main(){
 
     int num,rec,flag,frst=1,end=0;
     int rj,rk; //rec j, rec k;
-    while(1>0){
+    while(1){
         scanf("%d", &num);
         for(int i=1;i<=n;i++){
             for(int j=1;j<=m;j++)
