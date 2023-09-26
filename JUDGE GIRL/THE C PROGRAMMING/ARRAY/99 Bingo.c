@@ -10,14 +10,16 @@ signed main(){
     for(int i=1;i<=n;i++){
         scanf("%s", ppl[i]);
         for(int j=1;j<=m;j++)
-            for(int k=1;k<=m;k++) scanf("%d", &G[j][k][i]);
+            for(int k=1;k<=m;k++) 
+                scanf("%d", &(G[j][k][i]));
     }
 
-    int num,rec,flag,frst=1,end=0;
+    int num,rec,flag=0,frst=1;
     int rj,rk; //rec j, rec k;
     while(1){
         scanf("%d", &num);
         for(int i=1;i<=n;i++){
+            flag=0;
             for(int j=1;j<=m;j++)
                 for(int k=1;k<=m;k++) 
                     if(G[j][k][i]==num){ G[j][k][i]=-1, rj=j, rk=k;}
@@ -35,10 +37,10 @@ signed main(){
             if(rec==1) flag=1;
 
             //if(flag==1 && ppl[1][0]=='A' && ppl[1][1]=='l'){ printf("3 Alice Blob"); return 0;}
-            if(flag==1 && frst==1){ printf("%d", num); frst=0; end=1;}
+            if(flag==1 && frst==1){ printf("%d", num); frst++;}
             if(flag==1) printf(" %s", ppl[i]);
         }
-        if(end==1) break;
+        if(frst==2) break;
     }
     return 0;
 }
