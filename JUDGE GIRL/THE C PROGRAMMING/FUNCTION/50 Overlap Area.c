@@ -9,15 +9,15 @@ struct info{
 };
 
 int area1(struct info a){
-    return (a.rux-a.ldx)*(a.ruy-a.ldy);
+    return (a.rux-a.ldx+1)*(a.ruy-a.ldy+1);
 }
 
 int area2(struct info a, struct info b){
-    if(a.ldx>=b.rux || b.ldx>=a.rux || a.ruy<=b.ldy || b.ruy<=a.ldy) return 0;
-    if(a.ldx<b.rux && a.ldy<b.ruy) return (b.rux-a.ldx)*(b.ruy-a.ruy);
-    if(a.ldx<b.rux && a.ruy>b.ldy) return (b.rux-a.ldx)*(a.ruy-b.ldy);
-    if(a.rux>b.ldx && a.ldy<b.ruy) return (a.rux-b.ldx)*(b.ruy-a.ldy);
-    if(a.rux>b.ldx && a.ruy>b.ldy) return (a.rux-b.ldx)*(a.ruy-b.ldy);
+    if(a.ldx>b.rux || b.ldx>a.rux || a.ruy<b.ldy || b.ruy<a.ldy) return 0;
+    if(a.ldx<=b.rux && a.ldy<=b.ruy) return (b.rux-a.ldx+1)*(b.ruy-a.ldy+1);
+    if(a.ldx<=b.rux && a.ruy>=b.ldy) return (b.rux-a.ldx+1)*(a.ruy-b.ldy+1);
+    if(a.rux>=b.ldx && a.ldy<=b.ruy) return (a.rux-b.ldx+1)*(b.ruy-a.ldy+1);
+    if(a.rux>=b.ldx && a.ruy>=b.ldy) return (a.rux-b.ldx+1)*(a.ruy-b.ldy+1);
 }
 
 int area3(struct info a,struct info b,struct info c){
