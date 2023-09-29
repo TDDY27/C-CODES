@@ -1,37 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define min(i,j) i<j? i:j
+#define max(i,j) i>j? i:j
 
 struct info{
-    int lux, luy;
     int ldx, ldy;
     int rux, ruy;
-    int rdx, rdy;
 };
 
 int area1(struct info a){
-    return (a.rux-a.ldx+1)*(a.ruy-a.ldy+1);
+    return (a.rux-a.ldx)*(a.ruy-a.ldy);
 }
 
 int area2(struct info a, struct info b){
     if(a.ldx>b.rux || b.ldx>a.rux || a.ruy<b.ldy || b.ruy<a.ldy) return 0;
-    if(a.ldx<=b.rux && a.ldy<=b.ruy) return (b.rux-a.ldx+1)*(b.ruy-a.ldy+1);
-    if(a.ldx<=b.rux && a.ruy>=b.ldy) return (b.rux-a.ldx+1)*(a.ruy-b.ldy+1);
-    if(a.rux>=b.ldx && a.ldy<=b.ruy) return (a.rux-b.ldx+1)*(b.ruy-a.ldy+1);
-    if(a.rux>=b.ldx && a.ruy>=b.ldy) return (a.rux-b.ldx+1)*(a.ruy-b.ldy+1);
+    struct info trt;
+    trt.rux=min(a.rux,b.rux);
+    trt.ruy=min(a.ruy,b.ruy);
+    trt.ldx=max(a.ldx,b.ldx);
+    trt.ldy=max(a.ldy,b.ldy);
+    return (trt.rux-trt.ldx)*(trt.ruy-trt.ldy);
 }
 
 int area3(struct info a,struct info b,struct info c){
-    int sum=0,flag;
-    for(int i=a.ldx;i<=a.rux;i++){
-        for(int j=a.ldy;j<=a.ruy;j++){
-            flag=1;
-            if(i>a.rux || i<a.ldx || i>b.rux || i<b.ldx || i>c.rux || i<c.ldx) flag=0;
-            if(j>a.ruy || j<a.ldy || j>b.ruy || j<b.ldy || j>c.ruy || j<c.ldy) flag=0;
-            if(flag==1) sum++;
-        }
-    }
-    return sum;
+    if(a.ldx>b.rux || b.ldx>a.rux || a.ruy<b.ldy || b.ruy<a.ldy) return 0;
+    struct info trt;
+    trt.rux=min(a.rux,b.rux);
+    trt.ruy=min(a.ruy,b.ruy);
+    trt.ldx=max(a.ldx,b.ldx);
+    trt.ldy=max(a.ldy,b.ldy);
+    return area2(trt,c);
 }
+
 
 signed main(){
     struct info rt1,rt2,rt3;
