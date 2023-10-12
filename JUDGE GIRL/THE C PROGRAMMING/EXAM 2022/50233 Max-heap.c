@@ -9,7 +9,7 @@ int GL(int p){ //GET LARGEST
     int l=p*2;
     int r=p*2+1;
     int mmax=p;
-    if(l<=sz && mh[l]>mh[p]) mmax=l;
+    if(l<=sz && mh[l]>mh[mmax]) mmax=l;
     if(r<=sz && mh[r]>mh[mmax]) mmax=r;
     return mmax;
 }
