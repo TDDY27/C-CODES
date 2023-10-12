@@ -5,7 +5,7 @@ int evaluate_f(int *iptr[], int n, int *index){
     int mmax=-2147483648;
     for(int i=0;i<n;i++){
         int tx,ty;
-        tx=*(iptr[i]+0), ty=*(iptr[i]+1);
+        tx=iptr[i][0], ty=iptr[i][1];
         if(4*tx-6*ty>mmax) mmax=4*tx-6*ty, *index=i;
     }
     return mmax;
