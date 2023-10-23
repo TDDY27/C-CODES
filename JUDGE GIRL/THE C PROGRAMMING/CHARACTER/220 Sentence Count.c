@@ -12,9 +12,10 @@ signed main(){
 			if(rec[i]=='.') flag=1;
 			else if(flag && rec[i]==' ') flag++;
 			else if(flag && rec[i]=='\n') flag+=2;
-			else if(flag && rec[i]=='\0') flag=2;
+			else if(flag && rec[i]=='\0') flag=3;
 			else flag=0;
-			if(flag==2)ans++, flag=0;
+
+			if(flag==3)ans++, flag=0;
 		}
 	}
 	printf("%d\n", ans);
