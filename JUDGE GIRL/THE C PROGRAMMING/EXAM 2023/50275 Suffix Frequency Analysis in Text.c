@@ -2,7 +2,7 @@
 #include <string.h>
  
 signed main(){
-    char lne[100000];
+    char lne[100000] = {0};
     char* suf[]={"ed","tion","ness","ful","ing","ly","able","ous","ish","ive","less","ism","ist","ize","ment","ship","ary","ical","ence","hood"};
     for(int i=0;i<20-1;i++){
         for(int j=i+1;j<20;j++){
@@ -15,12 +15,12 @@ signed main(){
     }
  
     int rec[30]={0};
+    char chk[100000] = {0};
     while(gets(lne)){
         char *tmp;
-        char del[]=" .,!?;:";
+        char del[]=" \t\n.,!?;:";
         tmp=strtok(lne,del);
         while(tmp!=NULL){
-            char chk[100000];
             strcpy(chk,tmp);
             for(int i=0;i<20;i++){
                 char* pos=strstr(chk,suf[i]);
