@@ -14,8 +14,7 @@ void solve(int c,int n,int now,int pos,int G[][22],int C[]){
         }
         if(flag){ C[pos]=i; solve(c,n,now+1,pos+1,G,C); }
     }
-    printf("opopop");
-}   
+}
 
 signed main(){
     int n,c,p;
