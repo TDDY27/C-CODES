@@ -41,7 +41,7 @@ signed main(){
     int n;
     scanf("%d", &n);
     for(int i=0;i<n;i++){
-        nds[i]=(bst*)malloc(sizeof(bst*));
+        nds[i]=(bst*)malloc(sizeof(bst));
         scanf("%d%d", &(nds[i]->val),&(nds[i]->dpt));
     }
     qsort(nds,n,sizeof(bst*),cmp);
