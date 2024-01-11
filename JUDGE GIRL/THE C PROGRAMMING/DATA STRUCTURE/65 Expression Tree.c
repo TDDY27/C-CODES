@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+ 
 typedef struct tmpbt{
     int typ; // 0: operator 1:variable 2:number
     char nme[40];
@@ -10,7 +10,7 @@ typedef struct tmpbt{
     struct tmpbt *l;
     struct tmpbt *r;
 }bt;
-
+ 
 bt* bld(char inp[]){
     if(inp[0]=='(' || inp[0]==')'){
         scanf("%s", inp);
@@ -45,43 +45,18 @@ bt* bld(char inp[]){
         return nde;
     }
 }
-
-void solve(bt *now,int op,int *rc,int *ans,int n,char var[][40],int val[60]){
-    if(now->l!=NULL) solve(now->l,op,rc,ans,n,var,val);
+ 
+int solve(bt *now,int n,char var[][40],int val[60]){
     if(now->typ==0){
-        if(now->nme[0]=='+'){
-            *ans+=*rc;
-            *rc=1;
-            op=1;
-        }else if(now->nme[0]=='-'){
-            *ans+=*rc;
-            *rc=-1;
-            op=1;
-        }else if(now->nme[0]=='*'){
-            op=1;
-        }else if(now->nme[0]=='/'){
-            op=2;
-        }
+        if(now->nme[0]=='+') return solve(now->l,n,var,val)+solve(now->r,n,var,val);
+        else if(now->nme[0]=='-') return solve(now->l,n,var,val)-solve(now->r,n,var,val);
+        else if(now->nme[0]=='*') return solve(now->l,n,var,val)*solve(now->r,n,var,val);
+        else return solve(now->l,n,var,val)/solve(now->r,n,var,val);
     }else if(now->typ==1){
-        int tmp;
-        for(int i=0;i<n;i++) if(strcmp(var[i],now->nme)==0) tmp=val[i];
-        if(op==1) *rc*=tmp;
-        else if(op==2) *rc/=tmp;
+        for(int i=0;i<n;i++) if(strcmp(var[i],now->nme)==0) return val[i];
     }else if(now->typ==2){
-        if(op==1) *rc*=now->num;
-        else if(op==2) *rc/=now->num;
+        return now->num;
     }
-    if(now->r!=NULL) solve(now->r,op,rc,ans,n,var,val);
-}
-
-void tra(bt *now){
-    if(now->l != NULL) tra(now->l);
-
-    if(now->typ==0) printf("%c ", now->nme[0]);
-    else if(now->typ==1) printf("%s ", now->nme);
-    else if(now->typ==2) printf("%d ", now->num);
-
-    if(now->r != NULL) tra(now->r);
 }
 
 signed main(){
@@ -89,13 +64,16 @@ signed main(){
     bt *rt;
     scanf("%s", inp);
     rt=bld(inp);
-    int ans=0, rc=0;
+
     char var[60][40];
-    char bruh;
+    char bru;
     int val[60];
     int now=0;
-
-    while(scanf("%s%c%d", var[now],&bruh,&val[now])!=EOF) now++;
-    solve(rt,1,&rc,&ans,now,var,val);
-    printf("%d\n", ans);
+    while(scanf("%s", var[now])!=EOF){
+        if (strcmp(var[now],")")==0 ) continue;
+        scanf(" %c", &bru); // remark the left over new line character in the input buffer
+        scanf("%d", &val[now]);
+        now++;
+    }
+    printf("%d\n",solve(rt,now,var,val) );
 }
